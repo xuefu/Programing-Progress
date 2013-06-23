@@ -250,7 +250,9 @@ rake db:migrate命令可能是最经常使用到的，但是这只是其中之�
 
 
 
-``` ruby app/controllers/users_controller.rb
+``` 
+ 
+    ruby app/controllers/users_controller.rb
     class UsersController < ApplicationController
 
       def index
