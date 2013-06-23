@@ -719,7 +719,7 @@ ActiveRecord：：Base类是ActiveRecord提供的模型的基类。图2.16总结
 
 ```
 
-![pic](http://dl.iteye.com/upload/attachment/370012/d53669cd-bc2a-3da3-91ad-6eb7e004518a.png)
+![](http://dl.iteye.com/upload/attachment/370012/d53669cd-bc2a-3da3-91ad-6eb7e004518a.png)
 
 
   						图 2.17: Users和Microposts控制器的继承结构.
