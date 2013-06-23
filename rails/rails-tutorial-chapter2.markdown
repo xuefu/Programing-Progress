@@ -367,13 +367,16 @@ class UsersController < ApplicationController
 end
 ```
 
-在index方法中有 @users = User.all，这是告诉User模型去数据库检索出所有的用户，并把值赋给@users变量（发音“at-users”），User模型的代码如下2.5所示。尽管他非常的简单，但是它却有着非常牛B的功能，因为它继承了那个东西（可见2.3.4节和4.4）。特别是，因为使用Rails的Actuve Record库，下面的代码已经可以接受User.all来返回所有的用户了。
+在index方法中有 @users = User.all，这是告诉User模型去数据库检索出所有的用户，并把值赋给@users变量（发音“at-users”），User模型的代码如下2.5所示。尽管他非常的简单，但是它却有着非常牛B的功能，因为它继承了那个东西（可见2.3.4节和4.4）。特别是，因为使用Rails的Active Record库，下面的代码已经可以接受User.all来返回所有的用户了。
 
 **代码2.5. 演示程序的user模型**
 
-``` ruby app/models/user.rb
+``` 
+
+    ruby app/models/user.rb
     class User < ActiveRecord::Base
     end
+
 ```
 
 一旦@users被定义（赋值）之后，控制器就可以条用视图（View），如代码2.6。以“@”符号开始的变量成为类变量，可以自动的在视图中调用，在这里，index.html.erb（代码2.6）中的游标将会遍历@users数组变量然后为每一项输出一串HTML代码。
@@ -381,7 +384,9 @@ end
 **代码2.6. 用户index的视图(现在你不明白没关系。)**
 
 
-``` ruby app/views/users/index.html.erb
+``` 
+  
+    ruby app/views/users/index.html.erb
     <h1>Listing users</h1>
 
     <table>
@@ -408,6 +413,7 @@ end
     <br />
 
     <%= link_to 'New User', new_user_path %>
+
 ```
 这个视图将会被转换成HTML然后传回给浏览器，显示给用户。
 
