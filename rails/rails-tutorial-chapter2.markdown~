@@ -438,9 +438,7 @@ end
 
 和Users资源一样，我们先用Rails generate Scaffold创建Microposts资源的基本结构（Scaffold脚手架），如图2.3所示的那样，我们也创建了数据模型。
 
-``` 
-
-    bash
+``` bash
     $ rails generate scaffold Micropost content:string user_id:integer
           invoke  active_record
           create    db/migrate/20100615004429_create_microposts.rb
@@ -466,28 +464,22 @@ end
           create        test/unit/helpers/microposts_helper_test.rb
           invoke  stylesheets
        identical    public/stylesheets/scaffold.css
-
 ```
 
 如第2.2节，我们需要运行数据库迁移migration来更新数据库并添加新的数据模型。
-``` 
-
-    bash
+``` bash
     $ rake db:migrate
     ==  CreateMicroposts: migrating ===============================================
     -- create_table(:microposts)
        -> 0.0023s
     ==  CreateMicroposts: migrated (0.0026s) ======================================
-
 ```
 
 我们已经如第2.2.1节创建Users那样创建了Microposts。你或许猜到了，Scaffold 生成器也为Microposts更新了Rails的routes文件。如代码2.7。 和Users一样， 代码:“resources:microposts”的路由规则映射了URL和对应的Microposts控制器方法。如表2.3所示。
 
 *代码2.7 新增了Microposts资源的Rails路由*
 
-``` 
-
-    ruby config/routes.rb
+``` ruby config/routes.rb
     DemoApp::Application.routes.draw do
       resources :microposts
       resources :users
@@ -495,7 +487,6 @@ end
       .
       .
     end
-
 ```
 
 <br><table class="bbcode"><tbody><tr><td>HTTP request</td><td>	URL</td><td>	Action</td><td>	Purpose</td></tr><tr><td>GET</td><td>	/microposts</td><td>	index</td><td>	page to list all microposts</td></tr><tr><td>GET</td><td>	/microposts/1</td><td>	show</td><td>	page to show micropost with id 1</td></tr><tr><td>GET</td><td>	/microposts/new</td><td>	new</td><td>	page to make a new micropost</td></tr><tr><td>POST</td><td>	/microposts</td><td>	create</td><td>	create a new micropost</td></tr><tr><td>GET</td><td>	/microposts/1/edit</td><td>edit</td><td>	page to edit micropost with id 1</td></tr><tr><td>PUT</td><td>	/microposts/1</td><td>	update</td><td>	update micropost with id 1</td></tr><tr><td>DELETE</td><td>	/microposts/1</td><td>	destroy</td><td>	delete micropost with id 1</td></tr></tbody></table>
@@ -509,9 +500,7 @@ Microposts控制器示意代码如代码2.8所示。和代码2.3相比，除了�
 
 *代码2.8，Microposts的示意代码*
 
-``` 
-
-    ruby app/controllers/microposts_controller.rb
+``` ruby app/controllers/microposts_controller.rb
     class MicropostsController < ApplicationController
 
       def index
@@ -556,20 +545,19 @@ Microposts控制器示意代码如代码2.8所示。和代码2.3相比，除了�
         .
       end
     end
-
 ```
 
 让我们在“/microposts/new”页面添加一些实际的microposts（微博），如图2.12
 
 ![pic](http://dl.iteye.com/upload/attachment/369972/05fd9922-276e-39eb-992f-71eb189f1162.png)
 
-						图2.12 添加微博的页面（/microposts/new）
+\						图2.12 添加微博的页面（/microposts/new）
 
 就这样子，建立一两条微博，注意user_id为1是为了对应在2.2.1节中建立的第一个用户。结果如2.13图所示
 
 ![pic](http://dl.iteye.com/upload/attachment/369978/cc2087d7-e57c-37d8-9aea-f923778d8d5f.png)
 
-					图2.13 Microposts的index页面（/microposts）
+\					图2.13 Microposts的index页面（/microposts）
 
 ####2.3.2 给微博真正的“微”
 
@@ -577,13 +565,10 @@ Microposts控制器示意代码如代码2.8所示。和代码2.3相比，除了�
 任何敢叫微博的帖子要对得起他的称呼就要意味着要限制他的长度。要实现这个约束条件在Rails中是非常容易——使用模型验证（validations of rails）。我们可以使用length这个验证条件来限制微博的最大长度为140个字符（学习 Twitter）。你需要用你的IDE或者文本编辑器打开app/models/micropost.rb填入如代码2.9所示的代码（这个验证的使用是rails3的特性，如果你之前有使用Rails2.3.X版本，你可以对比一下“validates_length_of”的用法）。
 代码2.9 约束微博最大字符长度为140。
 
-``` 
-
-    ruby app/models/micropost.rb
+``` ruby app/models/micropost.rb
     class Micropost < ActiveRecord::Base
       validates :content, :length => { :maximum => 140 }
     end
-
 ```
 
 代码2.9看起来很神秘，不过不要紧,我们将在6.2节中学习更多的验证，但是如果我们回到New页面然后输入超过140个字符的微博就会发现他的影响已经出来了；Rails会渲染错误的信息并提示微博的内容过长（我们将在第8.2.3中学习更多的错误。）。
@@ -598,13 +583,10 @@ Microposts控制器示意代码如代码2.8所示。和代码2.3相比，除了�
 **代码 2.10. 一个user可以有多条微博信息microposts**
 
 
-``` 
-
-    ruby app/models/user.rb
+``` ruby app/models/user.rb
     class User < ActiveRecord::Base
       has_many :microposts
     end
-
 ```
 
 **代码 2.11 每一条微博信息都是属于某一个用户的**
@@ -627,8 +609,7 @@ Microposts控制器示意代码如代码2.8所示。和代码2.3相比，除了�
 
 在第11，12章中，我们将用这2者间的关系来显示所有用户的microposts信息和构建一个和Twitter类似的微博提要（microposts feed）。现在我们通过Rails的控制台（console）来验证user和microposts之间的关系，控制台是一个非常有用的工，他可以使我们和Rails程序之间进行交互。我们先从命令行输入“rails console”进入控制台，然后使用User.first从数据库检索出第一个user（将 结果赋值给变量first_user）；
 
-``` 
-    bash
+``` bash
     $ rails console
     >> first_user = User.first
     => #<User id: 1, name: "Michael Hartl", email: "michael@example.org",
@@ -638,7 +619,6 @@ Microposts控制器示意代码如代码2.8所示。和代码2.3相比，除了�
     "2010-04-03 02:37:37", updated_at: "2010-04-03 02:37:37">, #<Micropost id: 2,
     content: "Second micropost", user_id: 1, created_at: "2010-04-03 02:38:54",
     updated_at: "2010-04-03 02:38:54">]
-
 ```
 
 这样我们通过first_name.microposts获得了用户的微博信息：运行这个代码，Active Record 会自动返回所有user_id等于first_name的id（这里是1）。
@@ -652,22 +632,17 @@ ActiveRecord：：Base类是ActiveRecord提供的模型的基类。图2.16总结
 
 **代码 2.12 继承的User类**
 
-``` 
-
-    ruby app/models/user.rb
+``` ruby app/models/user.rb
     class User < ActiveRecord::Base
       .
       .
       .
     end
-
 ```
 
 **代码 2.13 继承的Micropost类**
 
-``` 
-
-    ruby app/models/micropost.rb
+``` ruby app/models/micropost.rb
     class Micropost < ActiveRecord::Base
       .
       .
@@ -684,45 +659,37 @@ ActiveRecord：：Base类是ActiveRecord提供的模型的基类。图2.16总结
 
 **代码 2.14. UsersController继承自ApplicationController.**
 
-``` 
-
-    ruby app/controllers/users_controller.rb
+``` ruby app/controllers/users_controller.rb
     class UsersController < ApplicationController
       .
       .
       .
     end
-
 ```
 
 
 **代码 2.15. MicropostsController 继承自ApplicationController.**
 
-``` 
-
-    ruby app/controllers/microposts_controller.rb
+``` ruby app/controllers/microposts_controller.rb
     class MicropostsController < ApplicationController
       .
       .
       .
     end
-
 ```
 
-```
-    ruby app/controllers/application_controller.rb
+```ruby app/controllers/application_controller.rb
     class ApplicationController < ActionController::Base
       .
       .
       .
     end
-
 ```
 
 ![pic](http://dl.iteye.com/upload/attachment/370012/d53669cd-bc2a-3da3-91ad-6eb7e004518a.png)
 
 
-  						图 2.17: Users和Microposts控制器的继承结构.
+\  						图 2.17: Users和Microposts控制器的继承结构.
 
 就和模型的继承一样，因为最终都继承自 ActionController::Base ，Users和Microposts的控制都获得大量的功能，比如操作模型对象，过滤收到的请求和渲染HTML页面。因为所有的控制都继承自ApplicationController，所以所有定义在Application Controller 里面的规则都会被自动的运用到所有的方法（action）中去；例如在8.2.4节中我们将看到如何在Application controller中定义一个允许我们从所有的Rails 日志文件中过滤掉密码的规则，这样可以避免一些安全隐患。
 
