@@ -215,14 +215,14 @@ rake db:migrate命令可能是最经常使用到的，但是这只是其中之�
 \						上表中步骤对应：
 
 
-1.The browser issues a request for the /users URL.    浏览器发送请求/users
-2.Rails routes /users to the index action in the Users controller.    Rails的路由组建分析它为对应users 控制器，index 的方法。
-3.The index action asks the User model to retrieve all users (User.all).    index通过User.all方法请求用户模型查找所有的用户。
-4.The User model pulls all the users from the database.    User模型从数据库提取出所有需要的用户。
-5.The User model returns the list of users to the controller.    User模型返回用户列表给控制器。
-6.The controller captures the users in the @users variable, which is passed to the index view.    控制器将这些用户注入@users的类变量中。该变量将会被传到视图中使用。
-7.The view uses Embedded Ruby to render the page as HTML.    视图利用内嵌的ruby代码来产生HTML文件；
-8.The controller passes the HTML back to the browser.7    控制器将HTML传回浏览器
+1. The browser issues a request for the /users URL.    浏览器发送请求/users
+2. Rails routes /users to the index action in the Users controller.    Rails的路由组建分析它为对应users 控制器，index 的方法。
+3. The index action asks the User model to retrieve all users (User.all).    index通过User.all方法请求用户模型查找所有的用户。
+4. The User model pulls all the users from the database.    User模型从数据库提取出所有需要的用户。
+5. The User model returns the list of users to the controller.    User模型返回用户列表给控制器。
+6. The controller captures the users in the @users variable, which is passed to the index view.    控制器将这些用户注入@users的类变量中。该变量将会被传到视图中使用。
+7. The view uses Embedded Ruby to render the page as HTML.    视图利用内嵌的ruby代码来产生HTML文件；
+8. The controller passes the HTML back to the browser.7    控制器将HTML传回浏览器
 
 我从浏览器（如IE）的地址栏出入URL或者点击一个链接开始发出一个请求，这个请求将会先会请求rails的“路由器router”，路由器将会基于URL选择目标控制器和ACTION（在BOX3.1中我将看到请求的方法。）。下表中的代码会为用户资源创建一个URL到控制器action的映射，这些代码会创建如前面表2.1所示的那样URL/action 对应关系。
 
