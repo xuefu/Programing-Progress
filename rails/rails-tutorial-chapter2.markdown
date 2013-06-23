@@ -229,7 +229,9 @@ rake db:migrate命令可能是最经常使用到的，但是这只是其中之�
 *Listing 2.2. Rails的映射Users 资源的路由.*
 
 
-``` ruby  config/routes.rb
+``` 
+
+   ruby  config/routes.rb
 
    DemoApp::Application.routes.draw do
       resources :users
