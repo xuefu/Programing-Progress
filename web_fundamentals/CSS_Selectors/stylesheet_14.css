@@ -1,0 +1,10 @@
+/*There are a number of usefule pseudo-class selectors for links, including:
+ * a:link => An unvisited link
+ * a:visited => A visited link
+ * a:hover => A link you're hovering your mouse over */
+
+a:hover {
+  color: #cc0000;
+  font-weight: bold;
+  text-decoration: none;
+}

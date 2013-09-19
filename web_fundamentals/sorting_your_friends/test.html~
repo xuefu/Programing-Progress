@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+    <title>My Social Network</title>
+  </head>
+  <body>
+    <!--Add your HTML below!-->
+    <div id="best_friend" class="friend"><img src="http://bit.io/img/Bit-Enterprises-ApS-Logo.png" /></div>
+    <div id="family" class="family"></div>
+    <div id="archnemesis" class="enemy"></div>
+  </body>
+</html>
